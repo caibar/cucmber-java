@@ -1,23 +1,29 @@
 package nicebank;
 
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import support.AtmUserInterface;
-import support.KnowsTheAccount;
-import support.KnowsTheTeller;
 
 public class TellerSteps {
 
-    KnowsTheAccount accountHelper;
+    Account account;
     Teller teller;
 
-    public TellerSteps(AtmUserInterface teller, KnowsTheAccount accountHelper) {
+    public TellerSteps(AtmUserInterface teller, Account account) {
         this.teller = teller;
-        this.accountHelper = accountHelper;
+        this.account = account;
     }
 
     @When("^I withdraw \\$(\\d+)$")
     public void iWithdraw$(int dollars) throws Throwable {
-        teller.withdrawFrom(accountHelper.getMyAccount(), dollars);
+        teller.withdrawFrom(account, dollars);
     }
 
+    @Then("^I should see an out-of-order message$")
+    public void iShouldSeeAnOutOfOrderMessage() throws Throwable {
+        /*Assert.assertTrue(
+                "Expected error message not displayed",
+                teller.isDisplaying("Out of order"));*/
+    }
 }

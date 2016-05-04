@@ -8,16 +8,24 @@
 ***/
 package support;
 
-import nicebank.Teller;
+import nicebank.CashSlot;
 
-public class KnowsTheTeller {
-    private final AtmUserInterface atmUserInterface;
+public class TestCashSlot extends CashSlot {
+    private boolean faulty;
 
-    public KnowsTheTeller(AtmUserInterface atmUserInterface) {
-        this.atmUserInterface = atmUserInterface;
+    /*public TestCashSlot() {
+        super.load(1000);
+    }*/
+
+    public void injectFault() {
+        faulty = true;
     }
-
-    public Teller getTeller() {
-        return atmUserInterface;
+    
+    public void dispense(int dollars){
+        if (faulty) {
+            throw new RuntimeException("Out of order");
+        } else {
+            super.dispense(dollars);
+        }
     }
 }
