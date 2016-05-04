@@ -1,23 +1,20 @@
 package nicebank;
 
 import cucumber.api.PendingException;
-import cucumber.api.Transform;
 import cucumber.api.java.en.Then;
 import org.junit.Assert;
-import support.KnowsTheDomain;
-import transforms.MoneyConverter;
 
 public class CashSlotSteps {
 
-    KnowsTheDomain helper;
+    CashSlot cashSlot;
 
-    public CashSlotSteps(KnowsTheDomain helper) {
-        this.helper = helper;
+    public CashSlotSteps(CashSlot cashSlot) {
+        this.cashSlot = cashSlot;
     }
 
     @Then("^\\$(\\d+) should be dispensed$")
     public void $ShouldBeDispensed(int dollars) throws Throwable {
-        Assert.assertEquals("Incorrect amount dispensed -", dollars, helper.getCashSlot().getContents());
+        Assert.assertEquals("Incorrect amount dispensed -", dollars, cashSlot.getContents());
     }
 
     @Then("^nothing should be dispensed$")
