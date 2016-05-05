@@ -8,7 +8,7 @@ import support.AtmUserInterface;
 public class TellerSteps {
 
     Account account;
-    Teller teller;
+    AtmUserInterface teller;
 
     public TellerSteps(AtmUserInterface teller, Account account) {
         this.teller = teller;
@@ -22,8 +22,8 @@ public class TellerSteps {
 
     @Then("^I should see an out-of-order message$")
     public void iShouldSeeAnOutOfOrderMessage() throws Throwable {
-        /*Assert.assertTrue(
+        Assert.assertTrue(
                 "Expected error message not displayed",
-                teller.isDisplaying("Out of order"));*/
+                teller.isDisplaying("Out of order"));
     }
 }

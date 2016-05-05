@@ -5,6 +5,7 @@ import cucumber.api.java.Before;
 import nicebank.Account;
 import nicebank.AtmServer;
 import nicebank.CashSlot;
+import support.TestCashSlot;
 
 
 public class ServerHooks {
@@ -12,9 +13,9 @@ public class ServerHooks {
 
     private AtmServer server;
     private Account account;
-    private CashSlot cashSlot;
+    private TestCashSlot cashSlot;
 
-    public ServerHooks(Account account, CashSlot cashSlot) {
+    public ServerHooks(Account account, TestCashSlot cashSlot) {
         this.account = account;
         this.cashSlot = cashSlot;
     }
