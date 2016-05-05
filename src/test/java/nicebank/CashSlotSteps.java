@@ -19,14 +19,13 @@ public class CashSlotSteps {
         Assert.assertEquals("Incorrect amount dispensed -", dollars, testCashSlot.getContents());
     }
 
-    @Then("^nothing should be dispensed$")
-    public void nothingShouldBeDispensed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
     @Given("^the cash slot has developed a fault$")
     public void theCashSlotHasDevelopedAFault() throws Throwable {
         testCashSlot.injectFault();
+    }
+
+    @Given("^the ATM contains \\$(\\d+)$")
+    public void theATMContains$(int dollars) throws Throwable {
+        testCashSlot.load(dollars);
     }
 }

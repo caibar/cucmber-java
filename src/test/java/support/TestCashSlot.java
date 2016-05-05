@@ -13,9 +13,9 @@ import nicebank.CashSlot;
 public class TestCashSlot extends CashSlot {
     private boolean faulty;
 
-    /*public TestCashSlot() {
+    public TestCashSlot() {
         super.load(1000);
-    }*/
+    }
 
     public void injectFault() {
         faulty = true;

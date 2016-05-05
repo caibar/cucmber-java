@@ -10,6 +10,7 @@ import transforms.MoneyConverter;
 public class AccountSteps {
 
     Account account;
+    private Money originalBalance;
 
     public AccountSteps(Account account) {
         this.account = account;
@@ -20,8 +21,23 @@ public class AccountSteps {
         account.credit(amount);
     }
 
+    @Given("^my account is in credit$")
+    public void myAccountIsInCredit$() throws Throwable {
+        originalBalance = new Money(30, 00);
+        account.credit(originalBalance);
+    }
+
+    @Then("^the balance of my account should be unchanged$")
+    public void theBalanceOfMyAccountShouldBeUnchanged() throws Throwable{
+        checkBalanceIs(originalBalance);
+    }
+
     @Then("^the balance of my account should be \\$(\\d+\\.\\d+)$")
     public void theBalanceOfMyAccountShouldBe$(@Transform(MoneyConverter.class) Money amount) throws Throwable {
+        checkBalanceIs(amount);
+    }
+
+    private void checkBalanceIs(Money amount) throws InterruptedException {
         int timeoutMilliSecs = 3000;
         int pollIntervalMilliSecs = 100;
         while (!account.getBalance().equals(amount) && timeoutMilliSecs > 0) {
@@ -30,12 +46,6 @@ public class AccountSteps {
         }
 
         Assert.assertEquals("Incorrect account balance -", amount, account.getBalance());
-    }
-
-    @Then("^I should be told that I have insufficient funds in my account$")
-    public void iShouldBeToldThatIHaveInsufficientFundsInMyAccount() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
     }
 
 }
